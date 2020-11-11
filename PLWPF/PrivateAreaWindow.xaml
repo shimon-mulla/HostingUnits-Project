@@ -1,0 +1,18 @@
+﻿<Window x:Class="PLWPF.PrivateAreaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLWPF"
+        mc:Ignorable="d"
+        Title="PrivateAreaWindow" FlowDirection="RightToLeft" Height="270" Width="400" WindowStartupLocation="CenterScreen">
+    <StackPanel Margin="5">
+        <TextBlock Margin="5 0" Text="ברוכים הבאים לאזור האישי."/>
+        <TextBlock Margin="5 0" Text="כאן ניתן לעדכן או למחוק את יחידת האירוח שלך."/>
+        <TextBlock Margin="5 0" Text="כמו כן, ניתן לעדכן את סטטוס ההזמנות המשוייכות אל יחידת האירוח."/>
+        <Button Margin="5" Content="עדכון יחידת אירוח" Background="#FF3A8AB7" Click="PerformUpdateUnit"/>
+        <Button Margin="5" Content="צפייה ביחידת האירוח" Background="#FF3A8AB7" Click="PerformViewUnit"/>
+        <Button Margin="5" Content="מחיקת יחידת אירוח" Background="#FF3A8AB7" Click="PerformRemoveUnit"/>
+        <Button Margin="5" Content="הזמנות" Background="#FF3A8AB7" Click="PerformShowOrdersOfUnit"/>
+    </StackPanel>
+</Window>

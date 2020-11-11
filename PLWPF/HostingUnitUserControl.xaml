@@ -1,0 +1,211 @@
+﻿<UserControl x:Class="PLWPF.HostingUnitUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PLWPF"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="850" FlowDirection="RightToLeft" d:DesignWidth="550">
+    <Border Name="border" Padding="2" Background="#FF8ABAC1">
+        <Border Margin="10 10" Padding="10 0" Grid.Column="0">
+            <StackPanel>
+                <StackPanel Name="DetailsOfUpdate">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center"/>
+                        <TextBlock Text="פרטיים אישיים" FontWeight="Bold" Margin="5 10" FontSize="14" />
+                    </StackPanel>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Margin="0 0 5 0" Grid.Column="0">
+                            <TextBlock Text="שם פרטי"/>
+                            <TextBox Name="firstName" Padding="2" PreviewTextInput="PreviewHebrewInput" Text="{Binding Path=hostingUnit.Owner.PrivateName, Mode=TwoWay}"/>
+                            <TextBlock Text="תעודת זהות"/>
+                            <TextBox Name="id" Padding="2" MaxLength="9"  Text="{Binding Path=hostingUnit.Owner.HostKey, Mode=TwoWay}" PreviewTextInput="PreviewNumericInput"/>
+                            <TextBlock Text="מספר טלפון"/>
+                            <TextBox Name="phonNumber" Padding="2" MaxLength="9" Text="{Binding Path=hostingUnit.Owner.PhoneNumber, Mode=TwoWay}"/>
+
+                        </StackPanel>
+                        <StackPanel Margin="5 0 0 0" Grid.Column="1">
+                            
+                            <TextBlock Text="שם משפחה"/>
+                            <TextBox Name="lastName"  PreviewTextInput="PreviewHebrewInput" Padding="2" Text="{Binding Path=hostingUnit.Owner.FamilyName, Mode=TwoWay}"/>
+                            <TextBlock Text="כתובת מייל"/>
+                            <TextBox Name="email" Padding="2" Text="{Binding Path=hostingUnit.Owner.MailAddress, Mode=TwoWay}" LostFocus="PreviewEmailInput"/>
+
+
+                        </StackPanel>
+
+                    </Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Bank" VerticalAlignment="Center"/>
+                        <TextBlock Text="פרטי חשבון בנק" FontWeight="Bold" Margin="5 10" FontSize="14"/>
+                    </StackPanel>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="בנק"/>
+                            <ComboBox materialDesign:ComboBoxAssist.ShowSelectedItem="True" materialDesign:HintAssist.Hint="נא לבחור בנק" Name="cbBanksList" IsEditable="True" Text="{Binding Path=lastSelectedBank,Mode=TwoWay}" SelectionChanged="cbBanksList_SelectionChanged" TextBoxBase.TextChanged="cbBanksList_TextChanged" DropDownOpened="cbBanksList_DropDownOpened"  >
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="ComboBoxItem">
+                                        <Setter Property="Width" Value="auto"/>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                            </ComboBox>
+                            <TextBox Visibility="Collapsed" Name="nameBank" Padding="2" Text="{Binding Path=hostingUnit.Owner.BankAccountDetails.BankName, Mode=TwoWay}"/>
+
+                            <TextBlock Text="כתובת"/>
+                            <TextBox Name="addressBranch" materialDesign:HintAssist.Hint="כתובת הסניף" Text="{Binding Path=hostingUnit.Owner.BankAccountDetails.BranchAddress, Mode=TwoWay}" IsEnabled="False"/>
+
+                            <TextBlock Margin="0 0 0 0" Text="מספר חשבון בנק"/>
+                            <TextBox Name="numAccount" PreviewTextInput="PreviewNumericInput" Padding="2" Text="{Binding Path=hostingUnit.Owner.BankAccountDetails.BankAccountNumber, Mode=TwoWay}"/>
+
+                        </StackPanel>
+                        <StackPanel Margin="5 0" Grid.Column="1">
+                            <TextBlock Text="סניף"/>
+                            <ComboBox materialDesign:HintAssist.Hint="נא לבחור סניף" Name="cbBranchesList" IsEditable="True" Text="{Binding Path=lastSelectedBranch,Mode=TwoWay}" SelectionChanged="cbBranchesList_SelectionChanged" TextBoxBase.TextChanged="cbBranchesList_TextChanged" DropDownOpened="cbBranchesList_DropDownOpened" >
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="ComboBoxItem">
+                                        <Setter Property="Width" Value="auto"/>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                            </ComboBox>
+                            <TextBox Visibility="Collapsed" Name="nameBranch" PreviewTextInput="PreviewNumericInput" Padding="2" Text="{Binding Path=hostingUnit.Owner.BankAccountDetails.BranchNumber, Mode=TwoWay}"/>
+
+                            <TextBlock Text="עיר"/>
+                            <TextBox materialDesign:HintAssist.Hint="עיר הסניף"  Name="cityBranch" IsEnabled="False"  Text="{Binding Path=hostingUnit.Owner.BankAccountDetails.BranchCity, Mode=TwoWay}"/>
+
+                        </StackPanel>
+ 
+
+                    </Grid>
+
+
+                    <CheckBox Name="Collection" Margin="0 1 0 0" FontWeight="Medium" Content="אישור גבייה מחשבון בנק" IsChecked="{Binding Path=hostingUnit.Owner.CollectionClearance, Mode=TwoWay}"/>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Hotel" VerticalAlignment="Center"/>
+                            <TextBlock Text="פרטי יחידת אירוח" FontWeight="Bold" Margin="5 10" FontSize="14" />
+                        </StackPanel>
+                        <Grid Name="GrideUnitDetails">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin="0 0 5 0">
+                                <TextBlock Margin="0 0 0 3" Text="שם יחידת אירוח" Grid.Column="0"/>
+                                <TextBox Name="hostingName" PreviewTextInput="PreviewHebrewInput"  Grid.Column="0" Text="{Binding Path=hostingUnit.HostingUnitName, Mode=TwoWay}"/>
+
+                                <TextBlock   Text="סוג היחידה" />
+                                <ComboBox Name="UnitTypeSelection"  Text="{Binding Path=hostingUnit.Type, Mode=TwoWay}" />
+
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="אזור" Grid.Column="0"/>
+                                <ComboBox Name="AreaSelection"  Text="{Binding Path=hostingUnit.Area, Mode=TwoWay}" />
+
+
+                                <TextBlock Margin="0 0 0 3" Text="תת אזור" />
+                                <TextBox Name="SubAreaUnit" PreviewTextInput="PreviewHebrewInput" Text="{Binding Path=hostingUnit.SubArea, Mode=TwoWay}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" Margin="5 0 0 0">
+                                <TextBlock Margin="0 0 0 3" Text="מספר מבוגרים" />
+                                <TextBox Name="numAdults" PreviewTextInput="PreviewNumericInput" Text="{Binding Path=hostingUnit.Adults, Mode=TwoWay}"/>
+
+                                <TextBlock Margin="0 0 0 3"  Text="מספר ילדים" />
+                                <TextBox Name="numChildren"   PreviewTextInput="PreviewNumericInput" Text="{Binding Path=hostingUnit.Children, Mode=TwoWay}"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+
+
+                    <Grid Margin="0 5 0 0">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="50" />
+                        </Grid.ColumnDefinitions>
+
+
+                        <StackPanel Grid.Column="0">
+
+                            <StackPanel Orientation="Horizontal" Height="20" Grid.Row="0">
+                                <materialDesign:PackIcon Kind="SwimmingPool"/>
+                                <TextBlock Margin="5 0" Text="בריכה" />
+
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Height="20">
+                                <materialDesign:PackIcon Kind="Water"/>
+                                <TextBlock Margin="5 0" Text="ג'קוזי" />
+
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"  Height="20">
+                                <materialDesign:PackIcon Kind="ViewAgenda"/>
+                                <TextBlock Margin="5 0" Text="מרפסת" />
+
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"  Height="20">
+                                <materialDesign:PackIcon Kind="PersonChild"/>
+                                <TextBlock Margin="5 0" Text="גינה"  />
+
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"  Height="20">
+                                <materialDesign:PackIcon Kind="PersonChild"/>
+                                <TextBlock Margin="5 0" Text="פעילויות לילדים"  />
+
+                            </StackPanel>
+
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1">
+                            <local:ToggleButoon x:Name="flagPool"   Height="20" MouseLeftButtonDown="MousePool" Width="47"/>
+                            <local:ToggleButoon x:Name="flagJacuzzi"   Height="20" MouseLeftButtonDown="MouseJacuzzi" />
+                            <local:ToggleButoon x:Name="flagPorch"    Height="20" MouseLeftButtonDown="MousePorch" />
+                            <local:ToggleButoon x:Name="flagGarden"   Height="20" MouseLeftButtonDown="MouseGarden"/>
+                            <local:ToggleButoon x:Name="flagAttraction"  Height="20"  MouseLeftButtonDown="MouseAttraction"/>
+                        </StackPanel>
+
+
+
+
+
+                    </Grid>
+                    
+                    <!-- Buttons -->
+                    <Grid Name="gridBtn" Margin="0 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="SaveBtn" Margin="0 0 10 0" Content="שמירה" Background="#FF3A8AB7" Grid.Column="0" Click="Save_click"/>
+                        <Button Name="ReturnBtn" Content="חזרה"  Grid.Column="1" Background="#FF3A8AB7" Click="Return_Click"/>
+                    </Grid>
+                </StackPanel>
+
+
+                <Popup Name="popCalendar" Placement="Left" AllowsTransparency="True" IsOpen="False">
+                    <Grid>
+                        <!--<Border BorderBrush="Orange" BorderThickness="1" Background="Yellow"/>
+                        <TextBlock Text="Lorem Ipsum is simply dummy text of the printing and typesetting industry"/>/-->
+                        <Calendar Name="myCalendar" />
+                    </Grid>
+                </Popup>
+            </StackPanel>
+            
+        </Border>
+    </Border>
+</UserControl>

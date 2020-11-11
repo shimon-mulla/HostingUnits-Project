@@ -1,0 +1,130 @@
+﻿<UserControl x:Class="PLWPF.GuestRequestUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PLWPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" FlowDirection="RightToLeft" d:DesignWidth="400" >
+    <Border Padding="2" Background="#FF8ABAC1">
+        <Border Margin="10 10" Padding="10 0" Grid.Column="0">
+            <StackPanel>
+                <TextBlock Text="פרטיים אישיים" FontWeight="Bold" Margin="0 10" FontSize="16"/>
+                <TextBlock Text="שם פרטי" />
+                <TextBox Name="tbPrivateName" Padding="2"  Text="{Binding Path=guestRequest.PrivateName, Mode=TwoWay, UpdateSourceTrigger = PropertyChanged}"  PreviewTextInput="PreviewHebrewInput"/>
+                <TextBlock Text="שם משפחה" />
+                <TextBox Name="tbFamilyName" Padding="2" Text="{Binding Path=guestRequest.FamilyName, Mode=TwoWay, UpdateSourceTrigger = PropertyChanged}"  PreviewTextInput="PreviewHebrewInput"/>
+                <TextBlock Text="כתובת אימייל" />
+                <TextBox Padding="2" Name="tbEmail" Text="{Binding Path=guestRequest.MailAdress, Mode=TwoWay, UpdateSourceTrigger = PropertyChanged}" LostFocus="PreviewEmailInput" />
+                <TextBlock Text="תאריך חופשה" FontWeight="Bold" Margin="0 10" FontSize="16"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="הגעה" />
+                        <DatePicker Name="DatePickerArrive" SelectedDateChanged="ArriveDate_Changed"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="עזיבה" />
+                        <DatePicker Name="DatePickerRelease" SelectedDateChanged="LeaveDate_Changed"/>
+                    </StackPanel>
+                </Grid>
+
+                <TextBlock Text="מיקום" FontWeight="Bold" Margin="0 10" FontSize="16"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Margin="0 0 5 0">
+                        <TextBlock Text="אזור" />
+                        <ComboBox Name="AreaSelection" Text="{Binding Path=guestRequest.Area, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Margin="5 0 0 0">
+                        <TextBlock Text="תת אזור" />
+                        <TextBox  Name="tbSubArea" Padding="2" Text="{Binding Path=guestRequest.SubArea, Mode=TwoWay, UpdateSourceTrigger = PropertyChanged}" PreviewTextInput="PreviewHebrewInput"/>
+                    </StackPanel>
+                </Grid>
+
+                <TextBlock Text="פרטי יחידת אירוח נדרשת" FontWeight="Bold" Margin="0 10" FontSize="16"/>
+                <TextBlock Text="סוג היחידה" />
+                <ComboBox Name="UnitTypeSelection" Text="{Binding Path=guestRequest.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="0 0 5 0"  Grid.Column="0">
+                        <TextBlock Text="מספר מבוגרים" />
+                        <TextBox  Name="tbAdults" Padding="2" Text="{Binding Path=guestRequest.Adults, Mode=TwoWay, UpdateSourceTrigger = PropertyChanged}" PreviewTextInput="PreviewNumericInput"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="5 0 0 0" Grid.Column="1">
+                        <TextBlock Text="מספר ילדים" />
+                        <TextBox  Name="tbChildren"  Padding="2" Text="{Binding Path=guestRequest.Children, Mode=TwoWay, UpdateSourceTrigger = PropertyChanged}" PreviewTextInput="PreviewNumericInput"/>
+                    </StackPanel>
+                </Grid>
+
+                <TextBlock Text="בריכה" Foreground="#FF0E5A85" FontWeight="Bold" Padding="0 2" />
+                <Grid Name="GridPool" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+
+                <TextBlock Text="ג'קוזי" Foreground="#FF0E5A85" FontWeight="Bold"  Padding="0 2"/>
+                <Grid Name="GridJacuzzi" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+
+                <TextBlock Text="מרפסת" Foreground="#FF0E5A85" FontWeight="Bold"  Padding="0 2"/>
+                <Grid Name="GridPorch" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+
+                <TextBlock Text="גינה" Foreground="#FF0E5A85" FontWeight="Bold"  Padding="0 2"/>
+                <Grid Name="GridGarden" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+
+                <TextBlock Text="פעילויות לילדים" Foreground="#FF0E5A85" FontWeight="Bold"  Padding="0 2"/>
+                <Grid Name="GridChildrenAttractions" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+                <!-- Buttons -->
+                <Grid Name="GuestButns" Margin="0 10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Name="btSave" Margin="0 0 10 0" Content="שמירה" Background="#FF3A8AB7" Grid.Column="0" Click="Button_Save"/>
+                    
+                </Grid>
+            </StackPanel>
+        </Border>
+    </Border>
+</UserControl>
